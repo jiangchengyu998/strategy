@@ -36,6 +36,7 @@ class ImageProxy implements Icon {
 		if (imageIcon != null) {
 			imageIcon.paintIcon(c, g, x, y);
 		} else {
+			// 先在这里显示内容
 			g.drawString("Loading CD cover, please wait...", x+300, y+190);
 			if (!retrieving) {
 				retrieving = true;
@@ -43,6 +44,7 @@ class ImageProxy implements Icon {
 				retrievalThread = new Thread(new Runnable() {
 					public void run() {
 						try {
+							// 就是在这一句话花费时间的
 							setImageIcon(new ImageIcon(imageURL, "CD Cover"));
 							c.repaint();
 						} catch (Exception e) {
